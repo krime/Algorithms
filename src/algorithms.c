@@ -55,11 +55,10 @@ void SelectionSort(int A[], int p, int r) {
 }
 
 void BubbleSort(int A[], int p, int r) {
-  for (int i=p;i<r-1;i++) {
-    for (int j=r-1;j>i;j--) {
-      if (A[j]<A[j-1]) swap(&A[j],&A[j-1]);
-    }
-  }
+  for (int i=p;i<r-1;i++)
+    for (int j=r-1;j>i;j--)
+      if (A[j]<A[j-1])
+        swap(&A[j],&A[j-1]);
 }
 
 int main(int argc, char* argv[]) {
