@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 void swap(int* x, int* y) {
   int t=*y;
@@ -44,6 +45,15 @@ void insertionsort(int A[], int p, int r) {
   }
 }
 
+void selectionsort(int A[], int p, int r) {
+  for (int i=0;i<r;i++) {
+    int min=i;
+    for (int j=i+1;j<r;j++)
+      if (A[min]>A[j]) min=j;
+    swap(&A[i],&A[min]);
+  }
+}
+
 int main(int argc, char* argv[]) {
   int n = 0;
   int *A = NULL;
@@ -77,7 +87,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
   }
   */
-  insertionsort(A,0,n);
+  selectionsort(A,0,n);
 
   printf("%d\n", n);
   for (i=0;i<n;i++) printf(" %d", A[i]);
