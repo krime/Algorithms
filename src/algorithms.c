@@ -8,6 +8,7 @@ void swap(int* x, int* y) {
 }
 
 void quicksort(int A[], int p, int r);
+void insertionsort(int A[], int p, int r);
 int  partition(int A[], int p, int r);
 
 void quicksort(int A[], int p, int r) {
@@ -33,24 +34,41 @@ int partition(int A[], int p, int r) {
   return i+1;
 }
 
+void insertionsort(int A[], int p, int r) {
+  for (int i=p+1;i<r;i++) {
+    int key=A[i];
+    int j=i-1;
+    for (;j>=p && A[j]<key;j--)
+      A[j+1]=A[j];
+    A[j+1]=key;
+  }
+}
+
 int main(int argc, char* argv[]) {
   int n = 0;
   int *A = NULL;
   int i = 0;
   int s = 0, t = 0;
 
+  char* pEnd;
+
   if (argc < 2) {
     exit(1);
   } else {
-    sscanf(argv[1], "%d", &n);
+    //printf("%d\n", argc);
+    //for (int i=0;i<argc; i++) puts(argv[i]);
+    //puts("");
+    //puts(argv[1]);
+    n=strtol(argv[1], &pEnd, 10);
     A = (int*)malloc(sizeof(int)*n);
-    for (i=0;i<n;i++) sscanf(argv[i+2],"%d",&A[i]);
+    for (i=0;i<n;i++) A[i]=strtol(argv[i+2],&pEnd,10);
   }
   
   printf("%d\n", n);
-  for (i=0;i<n;i++) printf("%d ", A[i]);
+  for (i=0;i<n;i++) printf(" %d", A[i]);
   printf("\n");
 
+  /*
   while (scanf("%d %d", &s, &t) == 2 && !(s==0 && t==0)) {
     if (s>n||t>n) continue;
     if (s>t) swap(&s, &t);
@@ -58,5 +76,12 @@ int main(int argc, char* argv[]) {
     for (i=0;i<n;i++) printf("%d ", A[i]);
     printf("\n");
   }
+  */
+  insertionsort(A,0,n);
+
+  printf("%d\n", n);
+  for (i=0;i<n;i++) printf(" %d", A[i]);
+  printf("\n");
+  
   return 0;
 }
