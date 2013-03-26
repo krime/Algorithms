@@ -1,0 +1,15 @@
+# Source Files
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/command.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/display.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/files.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/insert.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/kbd.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/main.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/search.c
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/src/utils.c
+# Compiler
+gcc
+# Header Files
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/hdr/buffer.h
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/hdr/command.h
+/cygdrive/c/Users/Krime/Desktop/Krime/Resources/Mine/NR/hdr/defs.h

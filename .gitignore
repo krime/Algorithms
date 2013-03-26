@@ -35,8 +35,8 @@
 
 # Ignore all files in the build/, debug/, release/ directories
 build/
-debug/
-release/
+# debug/
+# release/
 
 # Temporary directory
 tmp/
