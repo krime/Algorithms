@@ -35,7 +35,7 @@ int partition(int A[], int p, int r) {
   return i+1;
 }
 
-void insertionsort(int A[], int p, int r) {
+void InsertionSort(int A[], int p, int r) {
   for (int i=p+1;i<r;i++) {
     int key=A[i];
     int j=i-1;
@@ -45,12 +45,20 @@ void insertionsort(int A[], int p, int r) {
   }
 }
 
-void selectionsort(int A[], int p, int r) {
-  for (int i=0;i<r;i++) {
+void SelectionSort(int A[], int p, int r) {
+  for (int i=p;i<r;i++) {
     int min=i;
     for (int j=i+1;j<r;j++)
       if (A[min]>A[j]) min=j;
     swap(&A[i],&A[min]);
+  }
+}
+
+void BubbleSort(int A[], int p, int r) {
+  for (int i=p;i<r-1;i++) {
+    for (int j=r-1;j>i;j--) {
+      if (A[j]<A[j-1]) swap(&A[j],&A[j-1]);
+    }
   }
 }
 
@@ -87,7 +95,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
   }
   */
-  selectionsort(A,0,n);
+  BubbleSort(A,0,n);
 
   printf("%d\n", n);
   for (i=0;i<n;i++) printf(" %d", A[i]);
