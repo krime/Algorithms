@@ -43,7 +43,7 @@ void BubbleSort(int A[], int p, int r) {
 }
 
 void MergeSort(int A[], int p, int r) {
-  if (p<r) {
+  if (p<r-1) {
     int q=(r-p)/2+p;
     MergeSort(A,p,q);
     MergeSort(A,q,r);
@@ -59,16 +59,9 @@ void Merge(int A[], int p, int q, int r) {
   int* R=(int*)malloc((n2+1)*sizeof(A[0]));
 
   for (int i=0;i<n1;i++) L[i]=A[p+i];
-  for (int i=0;i<n2;i++) R[q+i]=A[q+i];
+  for (int i=0;i<n2;i++) R[i]=A[q+i];
   L[n1]=INT_MAX;
   R[n2]=INT_MAX;
-
-  for (int i=0;i<n1;i++)
-    printf(" %d", L[i]);
-  puts("");
-  for (int i=0;i<n2;i++)
-    printf(" %d", R[i]);
-  puts("");
 
   for (int i=0,j=0,k=p;k<r;k++) {
     if (L[i]<=R[j]) A[k]=L[i++];
@@ -79,25 +72,22 @@ void Merge(int A[], int p, int q, int r) {
 }
 
 void QuickSort(int A[], int p, int r) {
-  int q=0;
-  if (p<r) {
-    q = Partition(A, p, r);
-    QuickSort(A, p, q-1);
+  if (p<r-1) {
+    int q = Partition(A, p, r);
+    QuickSort(A, p, q);
     QuickSort(A, q+1, r);
   }
 }
 
 int Partition(int A[], int p, int r) {
-  int x = A[r];
   int i = p-1;
-  int j = 0;
-  for (j=p;j<r;j++) {
+  for (int j=p,x=A[r-1];j<r-1;j++) {
     if (A[j] <= x) {
       i++;
-      swap(&A[i], &A[j]);
+      if (i!=j) swap(&A[i], &A[j]);
     }
   }
-  swap(&A[i+1], &A[r]);
+  swap(&A[i+1], &A[r-1]);
   return i+1;
 }
 
@@ -134,7 +124,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
   }
   */
-  MergeSort(A,0,n);
+  QuickSort(A,0,n);
 
   printf("%d\n", n);
   for (i=0;i<n;i++) printf(" %d", A[i]);
