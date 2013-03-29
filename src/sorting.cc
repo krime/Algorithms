@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 #include <cctype>
 #include <ctime>
 
@@ -18,7 +19,7 @@ using namespace std;
 template<typename T> class Sort {
 private:
   typedef int (*compare)(T,T);
-  void swap(T&,T&);
+  void swap(T&r,T&s) {T t=r;r=s;s=t;}
   Sort(){}
   Sort(const Sort&){}
   Sort& operator=(Sort&){}
@@ -35,7 +36,7 @@ public:
 
 template<typename T> class SortSeq {
 private:
-  void swap(T&,T&);
+  void swap(T&r,T&s) {T t=r;r=s;s=t;}
   vector<T> v;
 public:
   SortSeq(vector<T> vec):v(vec){}
@@ -50,8 +51,11 @@ public:
   void Permutation(void);
 };
 
-template<typename T>
-void SortSeq<T>::Permutation(void) {
-  srand(time(NULL));
-  uint r=rand();
+template<typename T> void SortSeq<T>::Permutation(void) {
+  ::srand(time(NULL));
+  uint n=v.size();
+  for (uint i=0;i<n;i++) {
+    uint r=::rand()%(n-i)+i;
+    swap(&v[i],&v[r]);
+  }
 }
