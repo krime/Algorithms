@@ -26,13 +26,23 @@ private:
   const Sort& operator=(const Sort&){}
   ~Sort(){}
 public:
-  static void InsertionSort(T[],uint,uint,compare);
-  static void SelectionSort(T[],uint,uint,compare);
-  static void    BubbleSort(T[],uint,uint,compare);
-  static void     MergeSort(T[],uint,uint,compare);
-  static void     QuickSort(T[],uint,uint,compare);
-  static void      HeapSort(T[],uint,uint,compare);
+  typedef vector<T>::size_type counter;
+  static void InsertionSort(vector<T>,counter,counter,compare);
+  static void SelectionSort(vector<T>,counter,counter,compare);
+  static void    BubbleSort(vector<T>,counter,counter,compare);
+  static void     MergeSort(vector<T>,counter,counter,compare);
+  static void     QuickSort(vector<T>,counter,counter,compare);
+  static void      HeapSort(vector<T>,counter,counter,compare);
 };
+
+template<typename T> void Sort<T>::InsertionSort(vector<T> v,counter p,counter r,compare fc) {
+  for (counter i=p;i<r;i++) {
+    T key(v[i]);
+    counter j=i-1;
+    while (j>=p && v[j]<key) A[j+1]=A[j--];
+    A[j]=key;
+  }
+}
 
 template<typename T> class SortSeq {
 private:
@@ -51,8 +61,12 @@ public:
   void Permutation(void);
 };
 
+template<typename T> void OrderStat(uint& reverse, uint& ordered) {
+  
+}
+
 template<typename T> void SortSeq<T>::Permutation(void) {
-  ::srand(time(NULL));
+  ::srand(::time(NULL));
   uint n=v.size();
   for (uint i=0;i<n;i++) {
     uint r=::rand()%(n-i)+i;
