@@ -119,10 +119,10 @@ typename Sort<T>::size_type Sort<T>::Partition(vector<T> v,size_type p,size_type
 }
 
 template<typename T> class SortSeq {
-private:
-  void swap(T&r,T&s) {T t=r;r=s;s=t;}
-  vector<T> v;
 public:
+  typedef typename vector<T>::size_type size_type;
+  typedef typename vector<T>::iterator  iterator;
+
   SortSeq(vector<T> vec):v(vec){}
   SortSeq(const SortSeq& s):v(s.v){}
   SortSeq& operator=(SortSeq& s) {v=s.v;return *this;}
@@ -130,13 +130,26 @@ public:
   ~SortSeq() {}
 
   // Order Statistic
-  void OrderStat(uint&,uint&);
+  size_type OrderStat(size_type,size_type);
   // Permutation
   void Permutation(void);
+private:
+  void swap(T&r,T&s) {T t=r;r=s;s=t;}
+  vector<T> v;
+  // Number of Reversed Pairs
+  size_type rp;
 };
 
-template<typename T> void OrderStat(uint& reverse, uint& ordered) {
-  
+template<typename T>
+typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r) {
+  if (p<r-1) {
+    size_type q=(r-p)/2+p;
+    size_type r1=OrderStat(p,q);
+    size_type r2=OrderStat(q,r);
+    size_type r3=0;
+    for (size_type i=p;i<r;i++)
+      r3++;
+  }
 }
 
 template<typename T> void SortSeq<T>::Permutation(void) {
