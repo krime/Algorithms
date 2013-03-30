@@ -18,17 +18,10 @@ using namespace std;
  */
 
 template<typename T> class Sort {
-private:
-  typedef int (*compare)(void*,void*);
-  void swap(T&r,T&s) {T t=r;r=s;s=t;}
-  Sort(){}
-  Sort(const Sort&){}
-  Sort& operator=(Sort&){}
-  const Sort& operator=(const Sort&){}
-  ~Sort(){}
 public:
   typedef typename vector<T>::size_type size_type;
   typedef typename vector<T>::iterator  iterator;
+  typedef int (*compare)(void*,void*);
 
   static void InsertionSort(vector<T>,size_type,size_type,compare);
   static void SelectionSort(vector<T>,size_type,size_type,compare);
@@ -40,6 +33,17 @@ public:
   void Merge(vector<T>,size_type,size_type,size_type,compare);
   size_type Partition(vector<T>,size_type,size_type,compare);
   void Heapify(vector<T>,size_type,size_type,compare);
+
+private:
+  Sort(){}
+  Sort(const Sort&){}
+  Sort& operator=(Sort&){}
+  const Sort& operator=(const Sort&){}
+  ~Sort(){}
+
+  void swap(T&r,T&s) {T t=r;r=s;s=t;}
+  // Number of Reversed Pairs
+  size_type rp;
 };
 
 template<typename T>
@@ -122,6 +126,7 @@ template<typename T> class SortSeq {
 public:
   typedef typename vector<T>::size_type size_type;
   typedef typename vector<T>::iterator  iterator;
+  typedef int (*compare)(void*,void*);
 
   SortSeq(vector<T> vec):v(vec){}
   SortSeq(const SortSeq& s):v(s.v){}
@@ -130,7 +135,7 @@ public:
   ~SortSeq() {}
 
   // Order Statistic
-  size_type OrderStat(size_type,size_type);
+  size_type OrderStat(size_type,size_type,compare);
   // Permutation
   void Permutation(void);
 private:
@@ -141,14 +146,25 @@ private:
 };
 
 template<typename T>
-typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r) {
+typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r,compare fc) {
   if (p<r-1) {
     size_type q=(r-p)/2+p;
-    size_type r1=OrderStat(p,q);
-    size_type r2=OrderStat(q,r);
+    size_type r1=OrderStat(p,q,fc);
+    size_type r2=OrderStat(q,r,fc);
     size_type r3=0;
-    for (size_type i=p;i<r;i++)
-      r3++;
+    for (size_type i=0,j=0,k=p;k<r;k++) {
+      if (fc((void*)&v[p+i],(void*)&v[q+j])) {
+        i++;k++;
+      } else {
+        j++;k++;r3++;
+      }
+      if (j==r-q) {
+        r3+=q-i-1;
+        break;
+      }
+      if (i==q-p) break;
+    }
+    return r1+r2+r3;
   }
 }
 
