@@ -186,9 +186,9 @@ typename SortSeq<T>::size_type SortSeq<T>::MergeStat(vector<T> v,size_type p,siz
 
 template<typename T> void SortSeq<T>::Shuffle(void) {
   ::srand(::time(NULL));
-  uint n=v.size();
-  for (uint i=0;i<n;i++) {
-    uint r=::rand()%(n-i)+i;
+  size_type n=v.size();
+  for (size_type i=0;i<n;i++) {
+    size_type r=::rand()%(n-i)+i;
     swap(&v[i],&v[r]);
   }
 }
