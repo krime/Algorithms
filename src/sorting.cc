@@ -144,9 +144,10 @@ public:
   ~SortSeq() {}
 
   // Order Statistic
-  size_type OrderStat(size_type,size_type,compare);
+  size_type OrderStat(vector<T>,size_type,size_type,compare);
+  size_type MergeStat(vector<T>,size_type,size_type,size_type,compare);
   // Permutation
-  void Permutation(void);
+  void Shuffle(void);
 private:
   void swap(T&r,T&s) {T t=r;r=s;s=t;}
   vector<T> v;
@@ -155,29 +156,35 @@ private:
 };
 
 template<typename T>
-typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r,compare fc) {
+typename SortSeq<T>::size_type SortSeq<T>::OrderStat(vector<T> v,size_type p,size_type r,compare fc) {
   if (p<r-1) {
     size_type q=(r-p)/2+p;
-    size_type r1=OrderStat(p,q,fc);
-    size_type r2=OrderStat(q,r,fc);
-    size_type r3=0;
-    for (size_type i=0,j=0,k=p;k<r;k++) {
-      if (fc((void*)&v[p+i],(void*)&v[q+j])) {
-        i++;k++;
-      } else {
-        j++;k++;r3++;
-      }
-      if (j==r-q) {
-        r3+=q-i-1;
-        break;
-      }
-      if (i==q-p) break;
-    }
+    size_type r1=OrderStat(v,p,q,fc);
+    size_type r2=OrderStat(v,q,r,fc);
+    size_type r3=MergeStat(v,p,q,r,fc);
     return r1+r2+r3;
   }
 }
 
-template<typename T> void SortSeq<T>::Permutation(void) {
+template<typename T>
+typename SortSeq<T>::size_type SortSeq<T>::MergeStat(vector<T> v,size_type p,size_type q,size_type r,compare fc) {
+  iterator i1=v.begin();
+  iterator i2=v.begin()+(q-p);
+  size_type rp=0,ri=0;
+
+  vector<T> L(i1,i2);
+  vector<T> R(i2,v.end());
+
+  for (iterator i=L.begin(),j=R.begin(),k=v.begin();k!=v.end();k++) {
+    if (fc((void*)i,(void*)j)) {*k=*i;ri++;}
+    else {*k=*j;rp+=q-p-ri;}
+    if (i==L.end()) {copy(j,k,v.end());break;}
+    if (j==R.end()) {copy(i,k,v.end());rp+=q-p-ri;break;}
+  }
+  return rp;
+}
+
+template<typename T> void SortSeq<T>::Shuffle(void) {
   ::srand(::time(NULL));
   uint n=v.size();
   for (uint i=0;i<n;i++) {
