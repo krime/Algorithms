@@ -5,6 +5,15 @@
 #include <cctype>
 #include <ctime>
 
+/**
+ * @file   sorting.cc
+ * @author Krime <krimelam@gmail.com>
+ * @date   Sun Mar 31 01:31:17 UTC 2013
+ * @note
+ * 
+ * @brief
+ */
+
 #define uint unsigned int
 
 using namespace std;
@@ -176,3 +185,4 @@ template<typename T> void SortSeq<T>::Permutation(void) {
     swap(&v[i],&v[r]);
   }
 }
+
