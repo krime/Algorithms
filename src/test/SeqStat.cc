@@ -13,7 +13,7 @@ public:
   typedef int (*compare)(void*,void*);
 
   SortSeq(void):v(NULL){}
-  SortSeq(size_type n):v(n){}
+  SortSeq(T arr[]):v(arr){}
   SortSeq(vector<T> vec):v(vec){}
   SortSeq(const SortSeq& s):v(s.v){}
   SortSeq& operator=(SortSeq& s) {v=s.v;return *this;}
@@ -40,7 +40,8 @@ typename SortSeq<T>::size_type SortSeq<T>::OrderStat(vector<T> v,size_type p,siz
     size_type r1=OrderStat(v,p,q,fc);
     size_type r2=OrderStat(v,q,r,fc);
     size_type r3=MergeStat(v,p,q,r,fc);
-    return r1+r2+r3;
+    rp=r1+r2+r3;
+    return rp;
   }
 }
 
