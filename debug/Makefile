@@ -11,6 +11,7 @@ SRC:=$(wildcard ../src/*.c)
 
 CFLAGS:=-Wall -Wextra -O3 -g3 -I$(INC)
 CC:=gcc
+GCCINFO:=gcc -E -P -v -dD src/specs.c
 
 obj:=$(patsubst %.c,%.o,$(notdir $(SRC)))
 objs:=$(addprefix $(OBJ_DIR)/,$(obj))
