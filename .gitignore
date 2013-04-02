@@ -16,7 +16,7 @@
 *.[sS]
 
 # Compiled Executable files
-*.exe
+# *.exe
 
 # Core Dump files
 *.stackdump
