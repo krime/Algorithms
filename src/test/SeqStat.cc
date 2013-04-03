@@ -116,10 +116,10 @@ int main(void) {
   unsigned int n=sizeof(num)/sizeof(num[0]);
   for (unsigned int i=0;i<n;i++) num[i]=i;
   SortSeq<unsigned int> seq(num,n);
-  //cout<<seq<<endl;
   seq.Shuffle();
   //cout<<seq<<endl;
   //SortSeq<unsigned int>::size_type r=seq.ForceStat(comp);
   SortSeq<unsigned int>::size_type r=seq.OrderStat(comp);
   cout<<r<<endl;
+  cout<<128*127/2<<endl;
 }
