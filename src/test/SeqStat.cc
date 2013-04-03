@@ -12,6 +12,7 @@ template<typename T> class SortSeq {
 public:
   typedef typename vector<T>::size_type size_type;
   typedef typename vector<T>::iterator  iterator;
+  typedef typename vector<T>::const_iterator const_iterator;
   typedef int (*compare)(void*,void*);
 
   SortSeq(void):v(NULL){}
@@ -23,12 +24,15 @@ public:
   ~SortSeq() {}
 
   // Order Statistic
-  size_type OrderStat(vector<T>,size_type,size_type,compare);
-  size_type MergeStat(vector<T>,size_type,size_type,size_type,compare);
+  size_type OrderStat(compare);
+  size_type OrderStat(size_type,size_type,compare);
+  size_type MergeStat(size_type,size_type,size_type,compare);
+  size_type ForceStat(compare);
   // Permutation
   void Shuffle(void);
   // Display
-  void Display(void) {for (size_type i=0;i<v.size();i++)cout<<' '<<v[i];cout<<endl;}
+  template<typename Tt>
+  friend ostream& operator<<(ostream&, const SortSeq<Tt>&);
 private:
   void swap(T&r,T&s) {T t=r;r=s;s=t;}
 
@@ -38,35 +42,40 @@ private:
 };
 
 template<typename T>
-typename SortSeq<T>::size_type SortSeq<T>::OrderStat(vector<T> v,size_type p,size_type r,compare fc) {
+typename SortSeq<T>::size_type SortSeq<T>::OrderStat(compare fc) {
+  return OrderStat(0,v.size(),fc);
+}
+
+template<typename T>
+typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r,compare fc) {
   if (p<r-1) {
     size_type q=(r-p)/2+p;
-    size_type r1=OrderStat(v,p,q,fc);
-    size_type r2=OrderStat(v,q,r,fc);
-    size_type r3=MergeStat(v,p,q,r,fc);
+    size_type r1=OrderStat(p,q,fc);
+    size_type r2=OrderStat(q,r,fc);
+    size_type r3=MergeStat(p,q,r,fc);
     rp=r1+r2+r3;
     return rp;
   }
 }
 
 template<typename T>
-typename SortSeq<T>::size_type SortSeq<T>::MergeStat(vector<T> v,size_type p,size_type q,size_type r,compare fc) {
+typename SortSeq<T>::size_type SortSeq<T>::MergeStat(size_type p,size_type q,size_type r,compare fc) {
   vector<T> L(v.begin()+p,v.begin()+q);
   vector<T> R(v.begin()+q,v.begin()+r);
   size_type rp=0;
 
-  for (size_type i=0,j=0,k=p;k<r;k++) {
-    if (fc((void*)&L[i],(void*)&R[j])<0) v[k]=L[i++];
+  for (size_type i=0,j=0,k=p;k<r;) {
+    if (fc((void*)&L[i],(void*)&R[j])<0) v[k++]=L[i++];
     else {
-      v[k]=R[j++];
+      v[k++]=R[j++];
       rp+=q-p-i;
     }
     if (i==q-p) {
-      copy(L.begin()+j,v.begin()+j,v.begin()+q);
+      copy(R.begin()+j,R.end(),v.begin()+k);
       break;
     }
     if (j==r-q) {
-      copy(L.begin()+i,v.begin()+k,v.begin()+r);
+      copy(L.begin()+i,L.end(),v.begin()+k);
       rp+=(r-q)*(q-i);
       break;
     }
@@ -83,11 +92,36 @@ template<typename T> void SortSeq<T>::Shuffle(void) {
   }
 }
 
+template<typename T> ostream& operator<<(ostream& sout, const SortSeq<T>& s) {
+  for (typename SortSeq<T>::const_iterator it=s.v.begin();it<s.v.end();it++)
+    sout<<' '<<*it;
+  return sout;
+}
+
+template<typename T> typename SortSeq<T>::size_type SortSeq<T>::ForceStat(compare fc) {
+  size_type r=0;
+  for (size_type i=0;i<v.size();i++)
+    for (size_type j=i+1;j<v.size();j++)
+      if (fc((void*)&v[j],(void*)&v[i])<0)
+        r++;
+  return r;
+}
+
+int comp(void*a,void*b) {
+  return *(int*)a-*(int*)b;
+}
+
 int main(void) {
-  unsigned int num[128]={0};
-  for (unsigned int i=0;i<128;i++) num[i]=i;
-  SortSeq<unsigned int> seq(num,128);
-  seq.Display();
+  unsigned int num[8]={0};
+  unsigned int n=sizeof(num)/sizeof(num[0]);
+  for (unsigned int i=0;i<n;i++) num[i]=i;
+  SortSeq<unsigned int> seq(num,n);
+  cout<<seq<<endl;
   seq.Shuffle();
-  seq.Display();
+  cout<<seq<<endl;
+  SortSeq<unsigned int>::size_type r=seq.ForceStat(comp);
+  cout<<r<<endl;
+  r=seq.OrderStat(comp);
+  cout<<seq<<endl;
+  cout<<r<<endl;
 }
