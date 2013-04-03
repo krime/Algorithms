@@ -56,6 +56,7 @@ typename SortSeq<T>::size_type SortSeq<T>::OrderStat(size_type p,size_type r,com
     rp=r1+r2+r3;
     return rp;
   }
+  else return 0;
 }
 
 template<typename T>
@@ -76,7 +77,6 @@ typename SortSeq<T>::size_type SortSeq<T>::MergeStat(size_type p,size_type q,siz
     }
     if (j==r-q) {
       copy(L.begin()+i,L.end(),v.begin()+k);
-      rp+=(r-q)*(q-i);
       break;
     }
   }
@@ -112,16 +112,14 @@ int comp(void*a,void*b) {
 }
 
 int main(void) {
-  unsigned int num[8]={0};
+  unsigned int num[128]={0};
   unsigned int n=sizeof(num)/sizeof(num[0]);
   for (unsigned int i=0;i<n;i++) num[i]=i;
   SortSeq<unsigned int> seq(num,n);
-  cout<<seq<<endl;
+  //cout<<seq<<endl;
   seq.Shuffle();
-  cout<<seq<<endl;
-  SortSeq<unsigned int>::size_type r=seq.ForceStat(comp);
-  cout<<r<<endl;
-  r=seq.OrderStat(comp);
-  cout<<seq<<endl;
+  //cout<<seq<<endl;
+  //SortSeq<unsigned int>::size_type r=seq.ForceStat(comp);
+  SortSeq<unsigned int>::size_type r=seq.OrderStat(comp);
   cout<<r<<endl;
 }
