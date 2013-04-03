@@ -130,3 +130,26 @@ typename Sort<T>::size_type Sort<T>::Partition(vector<T> v,size_type p,size_type
   swap(&v[i+1],&v[r-1]);
   return i+1;
 }
+
+template<typename T>
+void Sort<T>::HeapSort(vector<T> v,size_type p,size_type r,compare fc) {
+  for (size_type i=(r-p)/2;i>0;i--)
+    Heapify(v,p,r,i,fc);
+}
+
+template<typename T>
+void Sort<T>::Heapify(vector<T> v,size_type p,size_type r,size_type i,compare fc) {
+  T ln=p+i*2+1;
+  T rn=p+i*2+2;
+  size_type s=0;
+
+  if (ln<=r && fc((void*)&v[ln],(void*)&v[i])<0)
+    s=ln;
+  else s=i;
+  if (rn<=r && fc((void*)&v[rn],(void*)&v[i])<0)
+    s=rn;
+  if (s!=i) {
+    swap(v[i],v[s]);
+    Heapify(v,p,r,s,fc);
+  }
+}
