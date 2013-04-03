@@ -41,7 +41,7 @@ public:
 
   void Merge(vector<T>,size_type,size_type,size_type,compare);
   size_type Partition(vector<T>,size_type,size_type,compare);
-  void Heapify(vector<T>,size_type,size_type,compare);
+  void Heapify(vector<T>,size_type,size_type,size_type,compare);
 
 private:
   Sort(){}
@@ -135,6 +135,10 @@ template<typename T>
 void Sort<T>::HeapSort(vector<T> v,size_type p,size_type r,compare fc) {
   for (size_type i=(r-p)/2;i>0;i--)
     Heapify(v,p,r,i,fc);
+  for (size_type i=r;i>1;i--) {
+    swap(v[0],v[i]);
+    
+  }
 }
 
 template<typename T>
