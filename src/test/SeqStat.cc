@@ -51,18 +51,25 @@ typename SortSeq<T>::size_type SortSeq<T>::OrderStat(vector<T> v,size_type p,siz
 
 template<typename T>
 typename SortSeq<T>::size_type SortSeq<T>::MergeStat(vector<T> v,size_type p,size_type q,size_type r,compare fc) {
-  iterator i1=v.begin();
-  iterator i2=v.begin()+(q-p);
-  size_type rp=0,ri=0;
+  vector<T> L(v.begin()+p,v.begin()+q);
+  vector<T> R(v.begin()+q,v.begin()+r);
+  size_type rp=0;
 
-  vector<T> L(i1,i2);
-  vector<T> R(i2,v.end());
-
-  for (iterator i=L.begin(),j=R.begin(),k=v.begin();k!=v.end();k++) {
-    if (fc((void*)i,(void*)j)) {*k=*i;ri++;}
-    else {*k=*j;rp+=q-p-ri;}
-    if (i==L.end()) {copy(j,k,v.end());break;}
-    if (j==R.end()) {copy(i,k,v.end());rp+=q-p-ri;break;}
+  for (size_type i=0,j=0,k=p;k<r;k++) {
+    if (fc((void*)&L[i],(void*)&R[j])<0) v[k]=L[i++];
+    else {
+      v[k]=R[j++];
+      rp+=q-p-i;
+    }
+    if (i==q-p) {
+      copy(L.begin()+j,v.begin()+j,v.begin()+q);
+      break;
+    }
+    if (j==r-q) {
+      copy(L.begin()+i,v.begin()+k,v.begin()+r);
+      rp+=(r-q)*(q-i);
+      break;
+    }
   }
   return rp;
 }
