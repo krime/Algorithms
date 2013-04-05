@@ -133,11 +133,11 @@ typename Sort<T>::size_type Sort<T>::Partition(vector<T> v,size_type p,size_type
 
 template<typename T>
 void Sort<T>::HeapSort(vector<T> v,size_type p,size_type r,compare fc) {
-  for (size_type i=(r-p)/2;i>0;i--)
+  for (size_type i=(r-p)/2;i>=0;i--)
     Heapify(v,p,r,i,fc);
-  for (size_type i=r;i>1;i--) {
+  for (size_type i=r-1;i>0;i--) {
     swap(v[0],v[i]);
-    
+    Heapify(v,p,r-1,0,fc);
   }
 }
 
@@ -145,12 +145,11 @@ template<typename T>
 void Sort<T>::Heapify(vector<T> v,size_type p,size_type r,size_type i,compare fc) {
   T ln=p+i*2+1;
   T rn=p+i*2+2;
-  size_type s=0;
+  size_type s=i;
 
-  if (ln<=r && fc((void*)&v[ln],(void*)&v[i])<0)
+  if (ln<=r && fc((void*)&v[ln],(void*)&v[s])<0)
     s=ln;
-  else s=i;
-  if (rn<=r && fc((void*)&v[rn],(void*)&v[i])<0)
+  if (rn<=r && fc((void*)&v[rn],(void*)&v[s])<0)
     s=rn;
   if (s!=i) {
     swap(v[i],v[s]);
