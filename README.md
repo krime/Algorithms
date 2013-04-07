@@ -1,6 +1,8 @@
 # Algorithms
 - - -
 
+All over the Algorithms will be list here:
+
 ## Sorting Algorithmgs
 1. Insertion Sort
 2. Selection Sort
@@ -9,4 +11,3 @@
 5. Quick Sort
 6. Heap Sort
 
-All over the Algorithms will be list here:
