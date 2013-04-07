@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include "sorting.h"
 
 using namespace std;
 
@@ -33,6 +34,10 @@ public:
   // Display
   template<typename Tt>
   friend ostream& operator<<(ostream&, const SortSeq<Tt>&);
+  // friend class Sort<T>;
+
+  // Getter
+  vector<T> getSeq(void) {return v;}
 private:
   void swap(T&r,T&s) {T t=r;r=s;s=t;}
 
@@ -119,7 +124,11 @@ int main(void) {
   seq.Shuffle();
   //cout<<seq<<endl;
   //SortSeq<unsigned int>::size_type r=seq.ForceStat(comp);
-  SortSeq<unsigned int>::size_type r=seq.OrderStat(comp);
-  cout<<r<<endl;
-  cout<<128*127/2<<endl;
+  //SortSeq<unsigned int>::size_type r=seq.OrderStat(comp);
+  //cout<<r<<endl;
+  //cout<<128*127/2<<endl;
+  cout<<seq<<endl;
+  vector<unsigned int> vec(num,num+128);
+  Sort::InsertionSort(vec,0,vec.size(),comp);
+  return 0;
 }
