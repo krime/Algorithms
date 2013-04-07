@@ -143,7 +143,7 @@ namespace sort {
 
   template<typename T>
   void QuickSort(vector<T>&v,size_type p,size_type r,compare fc) {
-    if (p<r-1) {
+    if (p<r-1 && r) {
       size_type q=Partition(v,p,r,fc);
       QuickSort(v,p,q,fc);
       QuickSort(v,q+1,r,fc);
@@ -164,9 +164,9 @@ namespace sort {
 
   template<typename T>
   void HeapSort(vector<T>&v,size_type p,size_type r,compare fc) {
-    for (size_type i=(r+p)/2-1;i>=p&&i+1!=0;i--)
+    for (size_type i=(r+p)/2-1;i>=p && i+1;i--)
       Heapify(v,p,r,i,fc);
-    for (size_type i=r-1;i>=p && i+1!=0;i--) {
+    for (size_type i=r-1;i>=p && i+1;i--) {
       swap(v[p],v[i]);
       Heapify(v,p,i,p,fc);
     }
@@ -187,30 +187,5 @@ namespace sort {
       Heapify(v,p,r,s,fc);
     }
   }
-
 }
-/*
-int comp(void*a,void*b) {
-  return *(int*)a-*(int*)b;
-}
-
-int main(void) {
-  int n[16]={0};
-  for (unsigned int i=0;i<8;i++)
-    n[i]=i;
-  for (unsigned int i=8;i<16;i++)
-    n[i]=23-i;
-  
-  vector<int> v(n,n+16);
-  for (vector<int>::size_type i=0;i<v.size();i++)
-   cout<<' '<<v[i];
-  cout<<endl;
-  HeapSort(v,0,v.size(),comp);
-  for (vector<int>::size_type i=0;i<v.size();i++)
-    cout<<' '<<v[i];
-  cout<<endl;
-  return 0;
-}
-*/
-
 #endif//_SORTING_H

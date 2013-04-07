@@ -129,7 +129,7 @@ int main(void) {
   //cout<<128*127/2<<endl;
   cout<<seq<<endl;
   vector<unsigned int> vec(seq.getSeq());
-  sort::InsertionSort(vec,0,vec.size(),comp);
+  sort::QuickSort(vec,0,vec.size(),comp);
   for (sort::size_type i=0;i<vec.size();i++)
     cout<<' '<<vec[i];
   cout<<endl;
