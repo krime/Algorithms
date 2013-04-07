@@ -129,6 +129,6 @@ int main(void) {
   //cout<<128*127/2<<endl;
   cout<<seq<<endl;
   vector<unsigned int> vec(num,num+128);
-  Sort::InsertionSort(vec,0,vec.size(),comp);
+  sort::InsertionSort(vec,0,vec.size(),comp);
   return 0;
 }
