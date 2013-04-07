@@ -92,12 +92,9 @@ template<typename T>
 void Sort::HeapSort(vector<T>&v,size_type p,size_type r,compare fc) {
   for (size_type i=(r+p)/2-1;i>=p&&i+1!=0;i--)
     Heapify(v,p,r,i,fc);
-  for (size_type i=p;i<r;i++)
-    cout<<v[i]<<' ';
-  cout<<endl;
   for (size_type i=r-1;i>=p && i+1!=0;i--) {
     swap(v[p],v[i]);
-    Heapify(v,p,r-1,p,fc);
+    Heapify(v,p,i,p,fc);
   }
 }
 
@@ -107,11 +104,9 @@ void Sort::Heapify(vector<T>&v,size_type p,size_type r,size_type i,compare fc) {
   size_type rn=i*2-p+2;
   size_type s=i;
 
-  cout<<v[i]<<' '<<v[ln]<<' '<<v[rn]<<endl;
-
-  if (ln<r && fc((void*)&v[ln],(void*)&v[s])<0)
+  if (ln<r && fc((void*)&v[ln],(void*)&v[s])>0)
     s=ln;
-  if (rn<r && fc((void*)&v[rn],(void*)&v[s])<0)
+  if (rn<r && fc((void*)&v[rn],(void*)&v[s])>0)
     s=rn;
   if (s!=i) {
     swap(v[i],v[s]);
