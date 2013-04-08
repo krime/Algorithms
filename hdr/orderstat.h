@@ -33,6 +33,9 @@ namespace stat {
   
   template<typename T>
   size_type RandomSelect(vector<T>&v,size_type p,size_type r,size_type k,compare fc) {
+    for (size_type i=p;i<r;i++)
+      cout<<' '<<v[i];
+    cout<<endl;
     if (p==r-1)
       return v[p];
     size_type q=RandomPartition(v,p,r,fc);
