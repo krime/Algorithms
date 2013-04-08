@@ -17,16 +17,16 @@ namespace stat {
   
   template<typename T>
   size_type RandomSelect(vector<T>&v,size_type p,size_type r,size_type k,compare fc) {
-    if (p==r)
+    if (p==r-1)
       return v[p];
     size_type q=RandomPartition(v,p,r,fc);
     size_type i=q-p;
     if (k==i)
       return v[q];
     else if (k<i)
-      return RandomSelect(v,p,q,k);
+      return RandomSelect(v,p,q,k,fc);
     else
-      return RandomSelect(v,q+1,r,k-i);
+      return RandomSelect(v,q,r,k-i-1,fc);
   }
 
   template<typename T>

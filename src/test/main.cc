@@ -36,5 +36,8 @@ int main(void) {
   for (sort::size_type i=0;i<vec.size();i++)
     cout<<' '<<vec[i];
   cout<<endl;
+  vector<int> s(v);
+  int rs=stat::RandomSelect(v,0,v.size(),4,comp);
+  cout<<rs<<endl;
   return 0;
 }
