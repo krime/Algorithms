@@ -15,7 +15,7 @@ int comp(void*a,void*b) {
 }
 
 int main(void) {
-  int num[16]={0};
+  int num[256]={0};
   unsigned int n=sizeof(num)/sizeof(num[0]);
   for (unsigned int i=0;i<n;i++) num[i]=i;
   vector<int> v(num,num+n);
@@ -40,7 +40,7 @@ int main(void) {
   for (sort::size_type i=0;i<s.size();i++)
     cout<<' '<<s[i];
   cout<<endl;
-  int rs=stat::RandomSelect(v,0,v.size(),5,comp);
+  int rs=stat::RandomSelect(v,0,v.size(),157,comp);
   cout<<rs<<endl;
   return 0;
 }

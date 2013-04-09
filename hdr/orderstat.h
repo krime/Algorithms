@@ -8,6 +8,7 @@
 
 using namespace std;
 
+static int randi=1;
 namespace stat {
   typedef unsigned long size_type;
   typedef int (*compare)(void*,void*);
@@ -17,9 +18,7 @@ namespace stat {
 
   template<typename T>
   size_type RandomPartition(vector<T>&v,size_type p,size_type r,compare fc) {
-    ::srand(::time(NULL));
     size_type n=::rand()%(r-p)+p;
-    
     if (n!=r-1) swap(v[n],v[r-1]);
     size_type i=p-1;
     T pivot=v[r-1];
@@ -33,9 +32,10 @@ namespace stat {
   
   template<typename T>
   size_type RandomSelect(vector<T>&v,size_type p,size_type r,size_type k,compare fc) {
-    for (size_type i=p;i<r;i++)
-      cout<<' '<<v[i];
-    cout<<endl;
+    if (randi) {
+      ::srand(::time(NULL));
+      randi=0;
+    }
     if (p==r-1)
       return v[p];
     size_type q=RandomPartition(v,p,r,fc);
@@ -45,7 +45,7 @@ namespace stat {
     else if (k<i)
       return RandomSelect(v,p,q,k,fc);
     else
-      return RandomSelect(v,q,r,k-i-1,fc);
+      return RandomSelect(v,q,r,k-i,fc);
   }
   
   template<typename T>
