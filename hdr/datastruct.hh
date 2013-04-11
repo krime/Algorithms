@@ -28,27 +28,27 @@ private:
     const Node& operator=(const Node&n) {k=n.k;next=NULL;return *this;}
     ~Node() {delete next;}
   };
-  Node head;
+  Node*head;
 public:
-  List():head() {}
-  List(T e):head() {
-    head.next=new Node(e);
-    head.next.next=NULL;
+  List():head(NULL) {}
+  List(T e):head(NULL) {
+    head->next=new Node(e);
+    head->next->next=NULL;
   }
   List(const List&l) {
-    Node*t=&(l.head);
-    Node*c=&head;
+    Node*t=l.head;
+    Node*c=head;
     while (t->next!=NULL) {
       c->next=new Node(*t.next);
       t=t->next;
     }
   }
   List& operator=(List&l) {
-    head.next=l.head.next;
+    head->next=l.head->next;
     return *this;
   }
   const List& operator=(const List&l) {
-    head.next=l.head.next;
+    head->next=l.head.next;
     return *this;
   }
   ~List() {
