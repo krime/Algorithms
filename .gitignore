@@ -12,6 +12,9 @@
 *.la
 *.a
 
+# Compiled Header Files
+*.gch
+
 # Compiled Assemble files
 *.[sS]
 

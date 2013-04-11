@@ -31,10 +31,7 @@ private:
   Node*head;
 public:
   List():head(NULL) {}
-  List(T e):head(NULL) {
-    head->next=new Node(e);
-    head->next->next=NULL;
-  }
+  List(T e):head(new Node(e)) {head->next=NULL;}
   List(const List&l) {
     Node*t=l.head;
     Node*c=head;
@@ -48,14 +45,14 @@ public:
     return *this;
   }
   const List& operator=(const List&l) {
-    head->next=l.head.next;
+    head->next=l.head->next;
     return *this;
   }
   ~List() {
-    Node*t=&head;
+    Node*t=head;
     while (t->next!=NULL) {
-      t=head.next;
-      delete *t;
+      head=t->next;
+      delete t;
     }
   }
 };
