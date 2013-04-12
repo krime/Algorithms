@@ -64,6 +64,7 @@ List<T>::List(T e):head(new Node<T>(e)),tail(new Node<T>(e)) {
   head->prev=tail->next=NULL;
 }
 
+// clone
 template<typename T>
 List<T>::List(const List&l):head(NULL),tail(NULL) {
   if (l.head==NULL) return;
@@ -77,27 +78,18 @@ List<T>::List(const List&l):head(NULL),tail(NULL) {
   }
 }
 
+// concat
 template<typename T>
 List<T>& List<T>::operator=(List&l) {
-  if (tail==NULL) {
-    head=l.head;
-    tail=l.tail;
-  } else {
-    tail->next=l.head;
-    l.head->prev=tail;
-  }
+  head=l.head;
+  tail=l.tail;
   return *this;
 }
 
 template<typename T>
 const List<T>& List<T>::operator=(const List&l) {
-  if (tail==NULL) {
-    head=l.head;
-    tail=l.tail;
-  } else {
-    tail->next=l.head;
-    l.head->prev=tail;
-  }
+  head=l.head;
+  tail=l.tail;
   return *this;
 }
 
@@ -161,11 +153,12 @@ ostream& operator<<(ostream&sout,const List<T>&l)  {
 
 int main(void) {
   List<int> l;
-  for (int i=0;i<100;i++) {
+  for (int i=0;i<100;i++)
     l.Insert(new Node<int>(i));
-  }
   l.Delete(l.Search(15));
   cout<<l<<endl;
+  List<int> m(l);
+  cout<<m<<endl;
   return 0;
 }
 #endif//_DATASTRUCT_H
