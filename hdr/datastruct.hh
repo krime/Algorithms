@@ -44,7 +44,7 @@ private:
   Node<T>*tail;
 public:
   List():head(NULL),tail(NULL) {}
-  List(T e):head(new Node<T>(e)),tail(new Node<T>(e)) {head->next=tail->prev=NULL;head->prev=tail->next=NULL;}
+  List(T e);
   List(const List&);
   List& operator=(List&);
   const List& operator=(const List&);
@@ -57,6 +57,12 @@ public:
   template<typename NT>
   friend ostream& operator<<(ostream&,const List<NT>&);
 };
+
+template<typename T>
+List<T>::List(T e):head(new Node<T>(e)),tail(new Node<T>(e)) {
+  head->next=tail->prev=NULL;
+  head->prev=tail->next=NULL;
+}
 
 template<typename T>
 List<T>::List(const List&l):head(NULL),tail(NULL) {
