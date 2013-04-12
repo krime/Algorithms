@@ -41,9 +41,10 @@ template <typename T>
 class List {
 private:
   Node<T>*head;
+  Node<T>*tail;
 public:
-  List():head(NULL) {}
-  List(T e):head(new Node<T>(e)) {head->next=NULL;head->prev=NULL;}
+  List():head(NULL),tail(NULL) {}
+  List(T e):head(new Node<T>(e)),tail(new Node<T>(e)) {head->next=tail->prev=NULL;head->prev=tail->next=NULL;}
   List(const List&);
   List& operator=(List&);
   const List& operator=(const List&);
@@ -53,32 +54,44 @@ public:
   List& Insert(Node<T>*);
   List& Delete(Node<T>*);
 
-  template<typename NT> friend
-  ostream& operator<<(ostream&,const List<NT>&);
+  template<typename NT>
+  friend ostream& operator<<(ostream&,const List<NT>&);
 };
 
 template<typename T>
-List<T>::List(const List&l) {
-  Node<T>*t=l.head;
+List<T>::List(const List&l):head(NULL),tail(NULL) {
+  if (l.head==NULL) return;
+  else head=tail=new Node<T>(*l.head);
+  
   Node<T>*c=head;
-  while (t->next!=NULL) {
-    c->next=new Node<T>(*t.next);
-    c->next->prev=&c;
-    t=t->next;
+  for (Node<T>*t=l.head->next;t!=NULL;t=t->next) {
+    c->next=new Node<T>(*t);
+    c->next->prev=c;
+    c=c->next;
   }
 }
 
 template<typename T>
 List<T>& List<T>::operator=(List&l) {
-  head->next=l.head->next;
-  l.head->prev=head;
+  if (tail==NULL) {
+    head=l.head;
+    tail=l.tail;
+  } else {
+    tail->next=l.head;
+    l.head->prev=tail;
+  }
   return *this;
 }
 
 template<typename T>
 const List<T>& List<T>::operator=(const List&l) {
-  head->next=l.head->next;
-  l.head->prev=head;
+  if (tail==NULL) {
+    head=l.head;
+    tail=l.tail;
+  } else {
+    tail->next=l.head;
+    l.head->prev=tail;
+  }
   return *this;
 }
 
