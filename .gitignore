@@ -54,4 +54,4 @@ tag/
 obj/
 
 # Ignore doc/notes.txt, but not doc/server/arch.txt
-doc/*.txt
+docs/
