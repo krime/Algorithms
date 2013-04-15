@@ -30,11 +30,14 @@ public:
   const Node& operator=(const Node&n) {k=n.k;next=NULL;prev=NULL;return *this;}
   ~Node() {}
 
-  T& operator*(void) {return k;}
+  Node& operator*(void) {return *this;}
   Node& operator++(void) {this=this->next;return *this;}
   Node& operator++(int) {Node*t=this;this=this->next;return *t;}
   Node& operator--(void) {this=this->prev;return *this;}
   Node& operator--(int) {Node*t=this;this=this->prev;return *t;}
+
+  Node* ptr_next(void) {return next;}
+  Node* ptr_prev(void) {return prev;}
 };
 
 template <typename T>
