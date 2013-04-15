@@ -1,0 +1,7 @@
+digraph flowchart {
+  node [shape=record];
+  DoubleLinkedList
+  [
+   label="{\<\< template \>\>\nList\<T\>|-Node\<T\>*head\n-Node\<T\>*tail|role}"
+   ]
+}
