@@ -9,7 +9,7 @@
 #include <ctime>
 
 /**
- * @file   sorting.cc
+ * @file   sorting.hh
  * @author Krime <krimelam@gmail.com>
  * @date   Sun Mar 31 01:31:17 UTC 2013
  * @note

@@ -5,15 +5,15 @@
 #include <vector>
 
 using namespace std;
-/*
-  Comman Operations on Dynamic Sets
-  Search(S,k)
-  Insert(S,x)
-  Delete(S,x)
-  Minimum(S)
-  Maximum(S)
-  Successor(S,x)
-  Predecessor(S,x)
+
+/**
+   @brief This class implements the containing unit that <b>Double Linked List</b> use
+ 
+   @details This class implements the containing unit that <b>Double Linked List</b> use
+   @author Krime Lam <krimelam@gmail.com>
+   @version 1.0
+   @date Mon Apr 15 03:43:09 UTC 2013
+   @class Node datastruct.hh "datastruct.hh"
  */
 
 template <typename T>
@@ -40,6 +40,24 @@ public:
   Node* ptr_prev(void) {return prev;}
 };
 
+/*!
+ * \brief This class implements the <b>Double Linked List</b>
+ * \details This class implements the <b>Double Linked List</b> with the following operations (Comman Operations on Dynamic Sets):
+ *
+ * - Search(S,k)
+ * - Insert(S,x)
+ * - Delete(S,x)
+ * - Minimum(S)
+ * - Maximum(S)
+ * - Successor(S,x)
+ * - Predecessor(S,x)
+ *
+ * \author Krime Lam <krimelam@gmail.com>
+ * \version 1.0
+ * \date Mon Apr 15 03:43:09 UTC 2013
+ * 
+ */
+
 template <typename T>
 class List {
 private:
@@ -61,6 +79,9 @@ public:
   friend ostream& operator<<(ostream&,const List<NT>&);
 };
 
+/*!
+ * \class List datastruct.hh "hdr/datastruct.hh"
+ */
 template<typename T>
 List<T>::List(T e):head(new Node<T>(e)),tail(new Node<T>(e)) {
   head->next=tail->prev=NULL;

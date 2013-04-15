@@ -6,28 +6,13 @@
 
 /**
  * @file   permutation.c
- * @author Krime <krime@excrosser>
- * @date   Mon Jan  9 03:48:26 2012
- * @note
- *
- * @brief  
- * @para   n
- *         The number range, default value: 16;
- * @para   r
- *         The randomize number from system;
- * @para   d
- *         The dividor, default value: 16;
- * @para   l
- *         The chargement for result, default value: 4;
- * @para   t
- *         The increment for srand(), default value: 0;
- * 
- * @return The permutation from 1 to n
+ * @author Krime <krime@gmail.com>
  */
 
-/** 
- * @func   swap
- * @author Krime <krime@excrossor>
+/**
+ * 
+ * @fn     swap(int*a,int*b)
+ * @author Krime <krime@gmail.com>
  *
  * @param  a
  *         swap number unit
@@ -36,6 +21,21 @@
  */
 void swap(int *a, int *b){int t=0;t=*a;*a=*b;*b=t;}
 
+/**
+ * @date   Mon Jan  9 03:48:26 2012
+ * @note
+ *
+ * @brief  
+ * @param argc The number of arguments
+ * @param argv Argument list for the following descriptions:
+ * - n The number range, default value: 16;
+ * - r The randomize number from system;
+ * - d The dividor, default value: 16;
+ * - l The chargement for result, default value: 4;
+ * - t The increment for srand(), default value: 0;
+ * 
+ * @return The permutation from 1 to n
+ */
 int main(int argc, char* argv[]) {
   int r=0,i=0,n=0,d=0,l=0,t=0;
   int a[N]={0};

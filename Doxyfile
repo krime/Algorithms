@@ -333,12 +333,12 @@ EXTRACT_ALL            = YES
 # If the EXTRACT_PRIVATE tag is set to YES all private members of a class 
 # will be included in the documentation.
 
-EXTRACT_PRIVATE        = NO
+EXTRACT_PRIVATE        = YES
 
 # If the EXTRACT_STATIC tag is set to YES all static members of a file 
 # will be included in the documentation.
 
-EXTRACT_STATIC         = NO
+EXTRACT_STATIC         = YES
 
 # If the EXTRACT_LOCAL_CLASSES tag is set to YES classes (and structs) 
 # defined locally in source files will be included in the documentation. 
@@ -351,7 +351,7 @@ EXTRACT_LOCAL_CLASSES  = YES
 # the interface are included in the documentation. 
 # If set to NO (the default) only methods in the interface are included.
 
-EXTRACT_LOCAL_METHODS  = NO
+EXTRACT_LOCAL_METHODS  = YES
 
 # If this flag is set to YES, the members of anonymous namespaces will be 
 # extracted and appear in the documentation as a namespace called 
@@ -359,7 +359,7 @@ EXTRACT_LOCAL_METHODS  = NO
 # name of the file that contains the anonymous namespace. By default 
 # anonymous namespaces are hidden.
 
-EXTRACT_ANON_NSPACES   = NO
+EXTRACT_ANON_NSPACES   = YES
 
 # If the HIDE_UNDOC_MEMBERS tag is set to YES, Doxygen will hide all 
 # undocumented members of documented classes, files or namespaces. 
@@ -1551,7 +1551,7 @@ MSCGEN_PATH            =
 # inheritance and usage relations if the target is undocumented 
 # or is not a class.
 
-HIDE_UNDOC_RELATIONS   = YES
+HIDE_UNDOC_RELATIONS   = NO
 
 # If you set the HAVE_DOT tag to YES then doxygen will assume the dot tool is 
 # available from the path. This tool is part of Graphviz, a graph visualization 
@@ -1566,7 +1566,7 @@ HAVE_DOT               = YES
 # explicitly to a value larger than 0 to get control over the balance 
 # between CPU load and processing speed.
 
-DOT_NUM_THREADS        = 0
+DOT_NUM_THREADS        = 5
 
 # By default doxygen will write a font called Helvetica to the output 
 # directory and reference it in all dot files that doxygen generates. 
@@ -1618,7 +1618,7 @@ UML_LOOK               = YES
 # If set to YES, the inheritance and collaboration graphs will show the 
 # relations between templates and their instances.
 
-TEMPLATE_RELATIONS     = YES
+TEMPLATE_RELATIONS     = NO
 
 # If the ENABLE_PREPROCESSING, SEARCH_INCLUDES, INCLUDE_GRAPH, and HAVE_DOT 
 # tags are set to YES then doxygen will generate a graph for each documented 
@@ -1703,7 +1703,7 @@ DOT_GRAPH_MAX_NODES    = 50
 # code bases. Also note that the size of a graph can be further restricted by 
 # DOT_GRAPH_MAX_NODES. Using a depth of 0 means no depth restriction.
 
-MAX_DOT_GRAPH_DEPTH    = 0
+MAX_DOT_GRAPH_DEPTH    = 10
 
 # Set the DOT_TRANSPARENT tag to YES to generate images with a transparent 
 # background. This is disabled by default, because dot on Windows does not 
@@ -1718,7 +1718,7 @@ DOT_TRANSPARENT        = NO
 # makes dot run faster, but since only newer versions of dot (>1.8.10) 
 # support this, this feature is disabled by default.
 
-DOT_MULTI_TARGETS      = NO
+DOT_MULTI_TARGETS      = YES
 
 # If the GENERATE_LEGEND tag is set to YES (the default) Doxygen will 
 # generate a legend page explaining the meaning of the various boxes and 
@@ -1730,4 +1730,4 @@ GENERATE_LEGEND        = YES
 # remove the intermediate dot files that are used to generate 
 # the various graphs.
 
-DOT_CLEANUP            = YES
+DOT_CLEANUP            = NO
