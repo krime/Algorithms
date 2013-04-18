@@ -6,3 +6,6 @@
 // L (<=16) letters in a word
 // T (<=80) letters in a sentence
 
+int main(void) {
+  return 0;
+}
