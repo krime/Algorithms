@@ -64,6 +64,7 @@ protected:
   struct Node {
     T key;
     Node* next;
+    Node* prev;
     Node(T k):key(k) {}
   };
 private:
@@ -77,12 +78,13 @@ public:
   const List& operator=(const List&);
   ~List();
 
-  Node<T>* Search(T);
-  List& Insert(Node<T>*);
-  List& Delete(Node<T>*);
-
+  //Node<T>* Search(T);
+  List& Insert(T);
+  List& Delete(T);
+  /*
   template<typename NT>
   friend ostream& operator<<(ostream&,const List<NT>&);
+  */
 };
 
 /**
@@ -145,7 +147,7 @@ List<T>::~List() {
     delete[] t;
   }
 }
-
+/*
 template<typename T>
 Node<T>* List<T>::Search(T k) {
   Node*t=head;
@@ -156,7 +158,7 @@ Node<T>* List<T>::Search(T k) {
   }
   return t;
 }
-
+*/
 template<typename T>
 List<T>& List<T>::Insert(T e) {
   Node*x=new Node(e);
@@ -186,7 +188,7 @@ List<T>& List<T>::Delete(T e) {
 
   return *this;
 }
-
+/*
 template<typename T>
 ostream& operator<<(ostream&sout,const List<T>&l)  {
   Node*t=l.head;
@@ -196,15 +198,15 @@ ostream& operator<<(ostream&sout,const List<T>&l)  {
   }
   return sout;
 }
-
+*/
 int main(void) {
   List<int> l;
   for (int i=0;i<100;i++)
-    l.Insert(new Node<int>(i));
-  l.Delete(l.Search(15));
-  cout<<l<<endl;
-  List<int> m(l);
-  cout<<m<<endl;
+    l.Insert(i);
+  //l.Delete(l.Search(15));
+  //cout<<l<<endl;
+  //List<int> m(l);
+  //cout<<m<<endl;
   return 0;
 }
 #endif//_DATASTRUCT_H
