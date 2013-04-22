@@ -30,6 +30,10 @@ void decrypt(string sentence, vector<string> dict) {
   vector<string> stc;
   string temp;
   while (sio>>temp) stc.push_back(temp);
+  sort(stc.begin(),stc.end());
+  stc.erase(unique(stc.begin(),stc.end()),stc.end());
+  for (vector<string>::iterator it=stc.begin();it!=stc.end();it++)
+    cout<<*it<<endl;
   cout<<stc.size()<<endl;
 }
 
@@ -38,7 +42,7 @@ bool length_order(string a,string b) {
 }
 
 int main(void) {
-  int n=0;             // N <=1000 words
+  int n=0;             // N <= 1000 words
   vector<string> dict; // n=dict.size()
   string sentence;     // sentence.size() <= 80
   memset(word_length,0,sizeof(word_length));
