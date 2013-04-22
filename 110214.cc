@@ -17,6 +17,10 @@ using namespace std;
 bool word_length[16]; // word length check
 char candidates[26];  // Ceaser's Code
 
+bool length_order(string a,string b) {
+  return a.size()>b.size();
+}
+
 bool pattern_match(string cypher, vector<string> dict, char candidates[]) {
   
 }
@@ -29,16 +33,20 @@ void decrypt(string sentence, vector<string> dict) {
   istringstream sio(sentence);
   vector<string> stc;
   string temp;
+  bool match=false;
   while (sio>>temp) stc.push_back(temp);
   sort(stc.begin(),stc.end());
   stc.erase(unique(stc.begin(),stc.end()),stc.end());
-  for (vector<string>::iterator it=stc.begin();it!=stc.end();it++)
-    cout<<*it<<endl;
-  cout<<stc.size()<<endl;
-}
-
-bool length_order(string a,string b) {
-  return a.size()<b.size();
+  stable_sort(stc.begin(),stc.end(),length_order);
+  //for (vector<string>::iterator it=stc.begin();it!=stc.end();it++)
+  //  cout<<*it<<endl;
+  //cout<<stc.size()<<endl;
+  for (vector<string>::size_type i=0;i<stc.size();i++) {
+    if (!(match=length_match(stc[i]))) break;
+    if (!(match=pattern_match(stc[i],dict,candidates))) break;
+  }
+  if (!match) memset(candidates,'*',sizeof(candidates));
+  //return result;
 }
 
 int main(void) {
