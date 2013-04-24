@@ -34,11 +34,12 @@ void process_solution(int a[],int k) {
 void backtrack(int a[],int k,int input) {
   int c[MAXCANDIDATES]; // candidates for next positions
   int ncandidates;      // next position candidates count
+  
+  k++; // Construct a new candidate
 
   if (is_a_solution(a,k,input))
     process_solution(a,k);
   else {
-    k++;
     construct_candidates(a,k,input,c,ncandidates);
     for (int i=0;i<ncandidates;i++) {
       a[k]=c[i];
