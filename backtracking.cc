@@ -25,7 +25,7 @@ void construct_candidates(int a[],int k,int n,int c[],int&ncandidates) {
 
 void process_solution(int a[],int k) {
   cout<<'{';
-  for (int i=0;i<k;i++)
+  for (int i=0;i<=k;i++)
     if (a[i])
       cout<<' '<<i+1;
   cout<<" }"<<endl;
@@ -34,8 +34,7 @@ void process_solution(int a[],int k) {
 void backtrack(int a[],int k,int input) {
   int c[MAXCANDIDATES]; // candidates for next positions
   int ncandidates;      // next position candidates count
-  
-  k++; // Construct a new candidate
+  k++;
 
   if (is_a_solution(a,k,input))
     process_solution(a,k);
