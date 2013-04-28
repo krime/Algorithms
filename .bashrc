@@ -303,7 +303,7 @@ PS_STAT="${PS_OVLN}${PS_SHEL}${PS_JOBS}${PS_CMDS}${PS_PIDS}${PS_SINS}${PS_HOST}$
 PS_PMPT="\[$_PBD_$_FNB_$_BND_\]\u \[$_PBD_$_FNW_$_BND_\][\W]"
 PS_NORM="\n\[\e[s\e[$_PCOLS_;0H\e[K${PS_STAT}\e[0m\e[u\]\[${PS_PMPT}\e[K\n\$ "
 
-PS_HACK='\[\e[1;30m\]\n[\[\e[38;5;246m\]$$:$PPID \j:\!\[\e[1;30m\]]\[\e[1;30m\][\[\e[38;5;27m\]\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY:-\l} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[0;37m\]\n\$ '
+PS_HACK='\[\e[1;30m\]\n[\[\e[38;5;246m\]$$:$PPID \j:\!\[\e[1;30m\]]\[\e[1;30m\][\[\e[38;5;27m\]\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY:-$(tty)} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[0;37m\]\n\$ '
 PS1=${PS_HACK}
 
 MEMTOTAL=$(sed -n "s/MemTotal:[\t ]\+\([0-9]\+\) kB/\1/Ip" /proc/meminfo)
