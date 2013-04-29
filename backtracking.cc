@@ -48,6 +48,7 @@ void backtrack(int a[],int k,int input) {
   }
 }
 
+
 int main(void) {
   int a[MAX];
   memset(a,0,sizeof a);
