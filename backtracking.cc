@@ -14,7 +14,7 @@ void process_solution(int[],int);
 bool finished=false;
 
 bool is_a_solution(int a[],int k,int n) {
-  return k==n;
+  return k+1==n;
 }
 
 void construct_candidates(int a[],int k,int n,int c[],int&ncandidates) {
@@ -36,13 +36,13 @@ void backtrack(int a[],int k,int input) {
   int ncandidates;      // next position candidates count
   k++;
 
-  if (is_a_solution(a,k,input))
+  if (is_a_solution(a,k-1,input))
     process_solution(a,k);
   else {
     construct_candidates(a,k,input,c,ncandidates);
     for (int i=0;i<ncandidates;i++) {
       a[k]=c[i];
-      backtrack(a,k,input);
+      backtrack(a,k+1,input);
       if (finished) return;
     }
   }
@@ -51,6 +51,6 @@ void backtrack(int a[],int k,int input) {
 int main(void) {
   int a[MAX];
   memset(a,0,sizeof a);
-  backtrack(a,-1,MAX);
+  backtrack(a,0,MAX);
   return 0;
 }
