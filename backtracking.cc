@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#define MAXCANDIDATES 5
-#define MAX 5
+#define MAXCANDIDATES 3
+#define MAX 3
 
 void backtrack(int[],int,int);
 bool is_a_solution(int[],int,int);
@@ -25,9 +25,9 @@ void construct_candidates(int a[],int k,int n,int c[],int&ncandidates) {
 
 void process_solution(int a[],int k) {
   cout<<'{';
-  for (int i=0;i<=k;i++)
+  for (int i=0;i<k;i++)
     if (a[i])
-      cout<<' '<<i+1;
+      cout<<' '<<i;
   cout<<" }"<<endl;
 }
 
@@ -51,6 +51,6 @@ void backtrack(int a[],int k,int input) {
 int main(void) {
   int a[MAX];
   memset(a,0,sizeof a);
-  backtrack(a,0,MAX);
+  backtrack(a,-1,MAX);
   return 0;
 }
