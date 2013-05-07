@@ -74,7 +74,29 @@ memingb() {
   echo "scale=2;$(memtotal)/1024/1024"|bc -q
 }
 
-PS_HACK='\n\e[1m\e[38;5;2m$(meminfo) % \e[38;5;78m/ $(memingb) GB \e[1m\e[38;5;73m$(< /proc/loadavg)\e[1m \e[38;5;33m\d \t\[\e[1;30m\]\n[\[\e[38;5;252m\]$$:$PPID \j:\!\[\e[1;30m\]]\[\e[1;30m\][\[\e[38;5;33m\]\u@\H\[\e[1;30m\]:\[\e[1;37m\]${SSH_TTY:-$(tty)} \[\e[1;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[1;37m\]\n\$ '
+gitstat() {
+  GitBranchStat=$(git status -s 2> /dev/null)
+  GitBranchStatResult=$?
+  if [ ! $GitBranchStatResult -eq 0 ]; then
+      echo -en "\e[m"
+  elif [ "$GitBranchStat" = "" ]; then
+      echo -en " \e[1;30m[\e[1;38;5;2m#"
+  else
+      echo -en " \e[1;30m[\e[1;38;5;78m*"
+  fi
+  echo -n $(git branch --color=never 2> /dev/null | sed 's@\* @@')
+  if [ $GitBranchStatResult -eq 0 ]; then
+      if [ "$GitBranchStat" = "" ]; then
+          echo -n "#"
+      else
+          echo -n "*"
+      fi
+      echo -en '\e[1;30m]\e[m'
+  fi
+}
+
+PS_HACK='\[\n\e[m\e[38;5;2m\]$(memperc) % \[\e[38;5;78m\]/ $(memingb) GB \[\e[m\e[38;5;65m\]$(< /proc/loadavg)\[\e[m \e[38;5;27m\]\d \t\[\e[1;30m\]\n[\[\e[38;5;252m\]$$:$PPID \j:\!\[\e[1;30m\]]\[\e[1;30m\][\[\e[38;5;27m\]\u@\H\[\e[1;30m\]:\[\e[1;37m\]${SSH_TTY:-$(tty)} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;30m\][\[\e[0m\]\[\e[1;37m\]\W\[\e[0m\]\[\e[1;30m\]]$(gitstat)\[\e[1;37m\]\n\$ '
+
 PS1=${PS_HACK}
 
 [ "$PS1" = "$PS_HACK" ] && export PROMPT_COMMAND='history -a'
