@@ -29,6 +29,7 @@ bool length_match(string cypher) {
   return word_length[cypher.size()-1];
 }
 
+
 void decrypt(string sentence, vector<string> dict) {
   istringstream sio(sentence);
   vector<string> stc;
